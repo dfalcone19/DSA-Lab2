@@ -1,5 +1,10 @@
 package code;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Formatter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -28,6 +33,15 @@ public class Lab2 {
 		Numbers num = new Numbers();
 		// boolean to break from loop, not just switch
 		boolean exit = false;
+		// declare file
+		FileWriter fw = null;
+		try {
+			fw = new FileWriter("logs/file");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 
 		while (true) {
 			// declare and initialize a new Scanner object
@@ -84,9 +98,33 @@ public class Lab2 {
 				}
 				break;
 			case 6:
-				System.out.println("Goodbye!");
-				// exit from loop
-				exit = true;
+				int itemsToAdd = 0;
+				System.out.println("How many values do you wish to add?");
+				// TODO: check for invalid integer input
+				try {
+					itemsToAdd = input.nextInt();
+				} catch (InputMismatchException ime) {
+					System.out.println("Please enter a valid integer\n");
+				}
+				
+				// TODO: i think this works but double check
+				for (int i = 0; i < itemsToAdd; i++) {
+					try {
+						num.addValue(input);
+					} catch (InputMismatchException ime) {
+						System.out.println("Please enter a valid number\n");
+					}
+				}
+				
+				break;
+			case 7:
+				try {
+					fw.write("hello!");
+					fw.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 			default:
 				// if the user does not enter a valid option 
@@ -110,7 +148,8 @@ public class Lab2 {
 				+ "2: To specify the max size of the array\n" + "3: Add value to the array\n"
 				+ "4: Display values in the array\n"
 				+ "5: Display average of the values, minimum value, maximum value, max mod min, and the factorial of the max\n"
-				+ "6: To Exit\n" + "> ");
+				+ "6: Enter multiple values\n" + "7: Read values from file\n" + "8: Save values to file\n" 
+				+ "9: Exit\n" + "> ");
 	}
 
 }
