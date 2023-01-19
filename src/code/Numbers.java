@@ -94,7 +94,7 @@ public class Numbers {
 		}
 		
 		for (int i = 0; i < numbers.length; i++) {
-			writer.format("%f", numbers[i]);
+			writer.format("%f\n", numbers[i]);
 		}
 		writer.flush();
 		writer.close();

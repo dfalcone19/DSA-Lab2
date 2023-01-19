@@ -123,7 +123,7 @@ public class Lab2 {
 					System.out.println("Please enter a valid file name");
 				}
 				
-				file = new File("file/" + fileName);
+				file = new File("files/" + fileName);
 				
 				try {
 					file.createNewFile();
