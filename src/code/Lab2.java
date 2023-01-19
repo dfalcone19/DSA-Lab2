@@ -112,18 +112,35 @@ public class Lab2 {
 				
 				break;
 			case 7:
-				writer.format("%d", 1231);
+				Scanner in = null;
+				System.out.println("Name of the file to read from: ");
+				String fileName = input.next();
+				File inFile = new File("files/" + fileName);
+				
+				try {
+					if (inFile.exists()) {
+						in = new Scanner(inFile);
+						while (in.hasNextFloat()) {
+							num.addValue(in);
+						}
+						
+					} else {
+						System.out.println("File not found");
+					}
+				} catch (IOException e) {
+					System.out.println("Could not open file");
+				}
 				break;
 			case 8:
-				String fileName = "";
+				String outFileName = "";
 				System.out.println("Name of the file to save to:");
 				try {
-					fileName = input.next();
+					outFileName = input.next();
 				} catch (InputMismatchException ime) {
 					System.out.println("Please enter a valid file name");
 				}
 				
-				file = new File("files/" + fileName);
+				file = new File("files/" + outFileName);
 				
 				try {
 					file.createNewFile();
@@ -132,7 +149,7 @@ public class Lab2 {
 					e.printStackTrace();
 				}
 				file.setWritable(true);
-				num.addValues(file, writer);
+				num.fileOut(file, writer);
 				break;
 			case 9:
 				System.out.println("Goodbye!");

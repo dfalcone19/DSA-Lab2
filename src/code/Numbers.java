@@ -83,7 +83,7 @@ public class Numbers {
 	 * @param file
 	 * @param writer
 	 */
-	public void addValues(File file, Formatter writer) {
+	public void fileOut(File file, Formatter writer) {
 		file.setWritable(true);
 		
 		try {
@@ -98,6 +98,10 @@ public class Numbers {
 		}
 		writer.flush();
 		writer.close();
+	}
+	
+	public void fileIn(File file) {
+		
 	}
 
 	/**
