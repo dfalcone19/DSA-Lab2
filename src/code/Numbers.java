@@ -1,5 +1,8 @@
 package code;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Formatter;
 import java.util.Scanner;
 
 /**
@@ -29,6 +32,10 @@ public class Numbers {
 	 * Store the number of items currently in the array.
 	 */
 	private int numItems;
+
+	public int getNumItems() {
+		return numItems;
+	}
 
 	/**
 	 * Default Constructor.
@@ -66,6 +73,21 @@ public class Numbers {
 			System.out.println("Array full");
 		}
 		System.out.println();
+	}
+	
+	public void addValues(File file, Formatter writer) {
+		try {
+			writer = new Formatter(file);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		file.setWritable(true);
+		for (int i = 0; i < numbers.length; i++) {
+			writer.format("%f", numbers[i]);
+		}
+		writer.flush();
+		writer.close();
 	}
 
 	/**

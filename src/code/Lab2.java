@@ -132,12 +132,7 @@ public class Lab2 {
 					e.printStackTrace();
 				}
 				file.setWritable(true);
-				try {
-					writer = new Formatter(file);
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				num.addValues(file, writer);
 				break;
 			case 9:
 				System.out.println("Goodbye!");
