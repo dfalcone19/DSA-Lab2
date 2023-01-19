@@ -34,14 +34,8 @@ public class Lab2 {
 		// boolean to break from loop, not just switch
 		boolean exit = false;
 		// declare file
-		FileWriter fw = null;
-		try {
-			fw = new FileWriter("logs/file");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		File file = null;
+		Formatter writer = null;
 
 		while (true) {
 			// declare and initialize a new Scanner object
@@ -118,13 +112,36 @@ public class Lab2 {
 				
 				break;
 			case 7:
+				writer.format("%d", 1231);
+				break;
+			case 8:
+				String fileName = "";
+				System.out.println("Name of the file to save to:");
 				try {
-					fw.write("hello!");
-					fw.close();
+					fileName = input.next();
+				} catch (InputMismatchException ime) {
+					System.out.println("Please enter a valid file name");
+				}
+				
+				file = new File("file/" + fileName);
+				
+				try {
+					file.createNewFile();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				file.setWritable(true);
+				try {
+					writer = new Formatter(file);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			case 9:
+				System.out.println("Goodbye!");
+				exit = true;
 				break;
 			default:
 				// if the user does not enter a valid option 
