@@ -74,15 +74,25 @@ public class Numbers {
 		}
 		System.out.println();
 	}
-	
+	///TODO: create a new method for writing to files and copy and paste below into it
+	/**
+	 * this method is supposed to extend the above method to accomodate for multiple values
+	 * should take in a scanner method for the amount of values to be added, and also to add them
+	 * using addValue
+	 *
+	 * @param file
+	 * @param writer
+	 */
 	public void addValues(File file, Formatter writer) {
+		file.setWritable(true);
+		
 		try {
 			writer = new Formatter(file);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		file.setWritable(true);
+		
 		for (int i = 0; i < numbers.length; i++) {
 			writer.format("%f", numbers[i]);
 		}
