@@ -46,7 +46,7 @@ public class Lab2 {
 			// verify user input is an integer
 			try {
 				choice = input.nextInt();
-			} catch (InputMismatchException ime) {
+			} catch (InputMismatchException e) {
 				System.out.println("Please only enter an integer\n");
 			}
 
@@ -63,9 +63,9 @@ public class Lab2 {
 					// instantiate num array to be the size of the user input
 					num = new Numbers(input.nextInt());
 					System.out.println();
-				} catch (InputMismatchException ime) {
+				} catch (InputMismatchException e) {
 					System.out.println("Please enter a valid integer\n");
-				} catch (NegativeArraySizeException nase) {
+				} catch (NegativeArraySizeException e) {
 					System.out.println("Please enter a positive integer\n");
 				}
 				break;
@@ -73,7 +73,7 @@ public class Lab2 {
 				// validate user input is a valid number
 				try {
 					num.addValue(input);
-				} catch (InputMismatchException ime) {
+				} catch (InputMismatchException e) {
 					System.out.println("Please enter a valid number\n");
 				}
 				break;
@@ -86,23 +86,31 @@ public class Lab2 {
 				try {
 					// call method that will display the average, min, max, min mod max, and max!
 					num.findMinMax();
-				} catch (NullPointerException npe) {
+				} catch (NullPointerException e) {
 					System.out.println("Array is empty!\n");
 				}
 				break;
 			case 6:
 				int itemsToAdd = 0;
-				System.out.println("How many values do you wish to add?");
-				// TODO: check for invalid integer input
+				System.out.print("How many values do you wish to add? ");
+
+				// check input is integer
 				try {
 					itemsToAdd = input.nextInt();
-				} catch (InputMismatchException ime) {
+				} catch (InputMismatchException e) {
 					System.out.println("Please enter a valid integer\n");
 				}
 
-				// TODO: i think this works but double check
+				// check input is a valid number
+				if (itemsToAdd < 0) {
+					System.out.println("Please enter a valid integer");
+					break;
+				}
+
+				// cycle through the items to add
 				for (int i = 0; i < itemsToAdd; i++) {
 					try {
+						// add items
 						num.addValue(input);
 					} catch (InputMismatchException ime) {
 						System.out.println("Please enter a valid number\n");
@@ -111,19 +119,31 @@ public class Lab2 {
 
 				break;
 			case 7:
+				// to be initiated using the file name
 				Scanner in = null;
-				System.out.println("Name of the file to read from: ");
+				// to track which line is currently being read
+				int line = 0;
+				System.out.print("Name of the file to read from: ");
 				String fileName = input.next();
-				File inFile = new File("files/" + fileName);
+				// create new file object to be read from
+				File inFile = new File(fileName);
 
 				try {
+					// if the file exists read from it line by line
 					if (inFile.exists()) {
 						in = new Scanner(inFile);
 						while (in.hasNextFloat()) {
-							num.addValues(in);
+							// if we have passed the first line then read
+							if (line > 0) {
+								num.addValues(in);
+							} else {
+								// if we are on the first line skip it and increment counter
+								in.nextLine();
+								line++;
+							}
 						}
-
 					} else {
+						// if the file does not exist tell the user
 						System.out.println("File not found");
 					}
 				} catch (IOException e) {
@@ -132,31 +152,37 @@ public class Lab2 {
 				break;
 			case 8:
 				String outFileName = "";
-				System.out.println("Name of the file to save to:");
+				System.out.print("Name of the file to save to:");
+
+				// verify the name entered is a valid string
 				try {
 					outFileName = input.next();
-				} catch (InputMismatchException ime) {
+				} catch (InputMismatchException e) {
 					System.out.println("Please enter a valid file name");
 				}
 
-				File file = new File("files/" + outFileName);
+				// instantiate new file object to be used to write out to
+				File file = new File(outFileName);
 
+				// create a new file
 				try {
 					file.createNewFile();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("File could not be created");
 				}
+				// set the file to writable
 				file.setWritable(true);
+				// call method in numbers
 				num.fileOut(file, writer);
 				break;
 			case 9:
+				// exit
 				System.out.println("Goodbye!");
 				exit = true;
 				break;
 			default:
 				// if the user does not enter a valid option
-				System.out.println("Please enter a valid menu option (1-6)\n");
+				System.out.println("Please enter a valid menu option (1-9)\n");
 			}
 
 			// break from loop

@@ -33,10 +33,6 @@ public class Numbers {
 	 */
 	private int numItems;
 
-	public int getNumItems() {
-		return numItems;
-	}
-
 	/**
 	 * Default Constructor.
 	 */
@@ -69,26 +65,39 @@ public class Numbers {
 			// add the value passed into the parameter to the array
 			numbers[numItems] = keyboard.nextFloat();
 			numItems++;
-		} catch (ArrayIndexOutOfBoundsException aiobe) {
+		} catch (ArrayIndexOutOfBoundsException e) {
 			System.out.println("Array full");
 		}
-		System.out.println();
+		System.out.print("\n");
 	}
 
+	/**
+	 * Adds a value to the array without printing anything. Used for entering
+	 * multiple values
+	 * 
+	 * @param keyboard - Scanner object to use for input
+	 */
 	public void addValues(Scanner keyboard) {
 		try {
 			// add the value passed into the parameter to the array
 			numbers[numItems] = keyboard.nextFloat();
 			numItems++;
-		} catch (ArrayIndexOutOfBoundsException aiobe) {
+		} catch (ArrayIndexOutOfBoundsException e) {
 			System.out.println("Array full");
 		}
 	}
 
+	/**
+	 * Writes the values of the array to a file.
+	 * 
+	 * @param file   - File to be written to
+	 * @param writer - Formatter object to be used to write to the file
+	 */
 	public void fileOut(File file, Formatter writer) {
-
+		// allow the file to be written to
 		file.setWritable(true);
 
+		// create new formatter object if the file exists
 		try {
 			writer = new Formatter(file);
 		} catch (FileNotFoundException e) {
@@ -96,15 +105,16 @@ public class Numbers {
 			System.out.println("File not found!");
 		}
 
+		// write the number of elements in the array to the first line
+		writer.format("%d\n", numItems);
+
+		// cycle through the numbers array and write each element to the file
 		for (int i = 0; i < numbers.length; i++) {
 			writer.format("%f\n", numbers[i]);
 		}
+
 		writer.flush();
 		writer.close();
-	}
-
-	public void fileIn(File file) {
-
 	}
 
 	/**
@@ -195,5 +205,14 @@ public class Numbers {
 			}
 		}
 		return elements;
+	}
+
+	/**
+	 * Accessor for numItems.
+	 * 
+	 * @return value of numItems
+	 */
+	public int getNumItems() {
+		return numItems;
 	}
 }
