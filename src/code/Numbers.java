@@ -74,34 +74,37 @@ public class Numbers {
 		}
 		System.out.println();
 	}
-	///TODO: create a new method for writing to files and copy and paste below into it
-	/**
-	 * this method is supposed to extend the above method to accomodate for multiple values
-	 * should take in a scanner method for the amount of values to be added, and also to add them
-	 * using addValue
-	 *
-	 * @param file
-	 * @param writer
-	 */
+
+	public void addValues(Scanner keyboard) {
+		try {
+			// add the value passed into the parameter to the array
+			numbers[numItems] = keyboard.nextFloat();
+			numItems++;
+		} catch (ArrayIndexOutOfBoundsException aiobe) {
+			System.out.println("Array full");
+		}
+	}
+
 	public void fileOut(File file, Formatter writer) {
+
 		file.setWritable(true);
-		
+
 		try {
 			writer = new Formatter(file);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		for (int i = 0; i < numbers.length; i++) {
 			writer.format("%f\n", numbers[i]);
 		}
 		writer.flush();
 		writer.close();
 	}
-	
+
 	public void fileIn(File file) {
-		
+
 	}
 
 	/**
@@ -150,7 +153,8 @@ public class Numbers {
 		// print out average
 		System.out.print("Average is: " + calcAverage());
 		// print out values from this method
-		System.out.print(", Minimum value is: " + min + ", Maximum value is: " + max +", max mod min is: " + maxModMin);
+		System.out
+				.print(", Minimum value is: " + min + ", Maximum value is: " + max + ", max mod min is: " + maxModMin);
 		// print out factorial of the integer value of the max if the max is positive
 		if (max >= 0) {
 			System.out.println(", factorial of max is: " + getFactorialMax(Math.round(max)) + "\n");

@@ -9,14 +9,11 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * CET-CS-Level 3 This is my own original work and is free from plagarism.
- * This is the main class that will cycle through the menu items and call on methods
- * from the Numbers class to manipulate the dynamic array.
- * Student Name: Daniel Falcone 
- * Student Number: 040993167
- * Section: 300 
- * Course: CST8130 - Data Structures
- * Professor: James Mwangi PhD
+ * CET-CS-Level 3 This is my own original work and is free from plagarism. This
+ * is the main class that will cycle through the menu items and call on methods
+ * from the Numbers class to manipulate the dynamic array. Student Name: Daniel
+ * Falcone Student Number: 040993167 Section: 300 Course: CST8130 - Data
+ * Structures Professor: James Mwangi PhD
  * 
  * @author Daniel Falcone
  * 
@@ -34,7 +31,6 @@ public class Lab2 {
 		// boolean to break from loop, not just switch
 		boolean exit = false;
 		// declare file
-		File file = null;
 		Formatter writer = null;
 
 		while (true) {
@@ -100,7 +96,7 @@ public class Lab2 {
 				} catch (InputMismatchException ime) {
 					System.out.println("Please enter a valid integer\n");
 				}
-				
+
 				// TODO: i think this works but double check
 				for (int i = 0; i < itemsToAdd; i++) {
 					try {
@@ -109,21 +105,21 @@ public class Lab2 {
 						System.out.println("Please enter a valid number\n");
 					}
 				}
-				
+
 				break;
 			case 7:
 				Scanner in = null;
 				System.out.println("Name of the file to read from: ");
 				String fileName = input.next();
 				File inFile = new File("files/" + fileName);
-				
+
 				try {
 					if (inFile.exists()) {
 						in = new Scanner(inFile);
 						while (in.hasNextFloat()) {
-							num.addValue(in);
+							num.addValues(in);
 						}
-						
+
 					} else {
 						System.out.println("File not found");
 					}
@@ -139,9 +135,9 @@ public class Lab2 {
 				} catch (InputMismatchException ime) {
 					System.out.println("Please enter a valid file name");
 				}
-				
-				file = new File("files/" + outFileName);
-				
+
+				File file = new File("files/" + outFileName);
+
 				try {
 					file.createNewFile();
 				} catch (IOException e) {
@@ -156,7 +152,7 @@ public class Lab2 {
 				exit = true;
 				break;
 			default:
-				// if the user does not enter a valid option 
+				// if the user does not enter a valid option
 				System.out.println("Please enter a valid menu option (1-6)\n");
 			}
 
@@ -177,8 +173,8 @@ public class Lab2 {
 				+ "2: To specify the max size of the array\n" + "3: Add value to the array\n"
 				+ "4: Display values in the array\n"
 				+ "5: Display average of the values, minimum value, maximum value, max mod min, and the factorial of the max\n"
-				+ "6: Enter multiple values\n" + "7: Read values from file\n" + "8: Save values to file\n" 
-				+ "9: Exit\n" + "> ");
+				+ "6: Enter multiple values\n" + "7: Read values from file\n" + "8: Save values to file\n" + "9: Exit\n"
+				+ "> ");
 	}
 
 }
