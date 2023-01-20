@@ -93,7 +93,7 @@ public class Numbers {
 			writer = new Formatter(file);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("File not found!");
 		}
 
 		for (int i = 0; i < numbers.length; i++) {

@@ -9,10 +9,13 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * CET-CS-Level 3 This is my own original work and is free from plagarism. This
- * is the main class that will cycle through the menu items and call on methods
- * from the Numbers class to manipulate the dynamic array. Student Name: Daniel
- * Falcone Student Number: 040993167 Section: 300 Course: CST8130 - Data
+ * CET-CS-Level 3 This is my own original work and is free from plagarism. 
+ * This is the main class that will cycle through the menu items and call on methods
+ * from the Numbers class to manipulate the dynamic array. 
+ * Student Name: Daniel Falcone 
+ * Student Number: 040993167 
+ * Section: 300 
+ * Course: CST8130 - Data
  * Structures Professor: James Mwangi PhD
  * 
  * @author Daniel Falcone
