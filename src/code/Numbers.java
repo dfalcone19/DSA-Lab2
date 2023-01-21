@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Formatter;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -113,16 +114,38 @@ public class Numbers {
 		} catch (IOException e) {
 			System.out.println("Could not open file");
 		}
+		System.out.println();
 	}
 
 	/**
 	 * Writes the values of the array to a file.
 	 * 
-	 * @param file   - File to be written to
-	 * @param writer - Formatter object to be used to write to the file
 	 */
-	public void fileOut(File file, Formatter writer) {
-		// allow the file to be written to
+	public void saveToFile() {
+		Scanner input = new Scanner(System.in);
+		Formatter writer = null;
+		String outFileName = "";
+		System.out.print("Name of the file to save to: ");
+
+		// verify the name entered is a valid string
+		try {
+			outFileName = input.next();
+		} catch (InputMismatchException e) {
+			System.out.println("Please enter a valid file name");
+		}
+
+		// instantiate new file object to be used to write out to
+		File file = new File(outFileName);
+
+		// create a new file
+		try {
+			file.createNewFile();
+		} catch (IOException e) {
+			System.out.println("File could not be created");
+		}
+		// set the file to writable
+		file.setWritable(true);
+		// call method in numbers
 		file.setWritable(true);
 
 		// create new formatter object if the file exists
@@ -143,6 +166,7 @@ public class Numbers {
 
 		writer.flush();
 		writer.close();
+		System.out.println();
 	}
 
 	/**

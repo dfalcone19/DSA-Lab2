@@ -103,7 +103,7 @@ public class Lab2 {
 
 				// check input is a valid number
 				if (itemsToAdd < 0) {
-					System.out.println("Please enter a valid integer");
+					System.out.println("Please enter a valid integer\n");
 					break;
 				}
 
@@ -122,29 +122,7 @@ public class Lab2 {
 				num.addValues(input);
 				break;
 			case 8:
-				String outFileName = "";
-				System.out.print("Name of the file to save to:");
-
-				// verify the name entered is a valid string
-				try {
-					outFileName = input.next();
-				} catch (InputMismatchException e) {
-					System.out.println("Please enter a valid file name");
-				}
-
-				// instantiate new file object to be used to write out to
-				File file = new File(outFileName);
-
-				// create a new file
-				try {
-					file.createNewFile();
-				} catch (IOException e) {
-					System.out.println("File could not be created");
-				}
-				// set the file to writable
-				file.setWritable(true);
-				// call method in numbers
-				num.fileOut(file, writer);
+				num.saveToFile();
 				break;
 			case 9:
 				// exit
