@@ -2,6 +2,7 @@ package code;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Formatter;
 import java.util.Scanner;
 
@@ -57,9 +58,12 @@ public class Numbers {
 	 * Adds a value in the array.
 	 * 
 	 * @param keyboard - Scanner object to use for input
+	 * @param isFile - Determines if reading from a file or from user input
 	 */
-	public void addValue(Scanner keyboard) {
-		System.out.print("Enter value: ");
+	public void addValue(Scanner keyboard, boolean isFile) {
+		if (!isFile) {
+			System.out.print("Enter value: ");
+		}
 		// validate that the number of elements doesn't exceed the size of the array
 		try {
 			// add the value passed into the parameter to the array
@@ -68,22 +72,46 @@ public class Numbers {
 		} catch (ArrayIndexOutOfBoundsException e) {
 			System.out.println("Array full");
 		}
-		System.out.print("\n");
+		if (!isFile) {
+			System.out.print("\n");
+		}
 	}
 
 	/**
-	 * Adds a value to the array without printing anything. Used for entering
-	 * multiple values
+	 * Adds a value to the array by reading from a file
 	 * 
 	 * @param keyboard - Scanner object to use for input
 	 */
 	public void addValues(Scanner keyboard) {
+		// to be initiated using the file name
+		Scanner in = null;
+		// to track which line is currently being read
+		int line = 0;
+		System.out.print("Name of the file to read from: ");
+		String fileName = keyboard.next();
+		// create new file object to be read from
+		File inFile = new File(fileName);
+
 		try {
-			// add the value passed into the parameter to the array
-			numbers[numItems] = keyboard.nextFloat();
-			numItems++;
-		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println("Array full");
+			// if the file exists read from it line by line
+			if (inFile.exists()) {
+				in = new Scanner(inFile);
+				while (in.hasNextFloat()) {
+					// if we have passed the first line then read
+					if (line > 0) {
+						addValue(in, true);
+					} else {
+						// if we are on the first line skip it and increment counter
+						in.nextLine();
+						line++;
+					}
+				}
+			} else {
+				// if the file does not exist tell the user
+				System.out.println("File not found");
+			}
+		} catch (IOException e) {
+			System.out.println("Could not open file");
 		}
 	}
 

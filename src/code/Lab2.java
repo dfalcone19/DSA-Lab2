@@ -72,7 +72,7 @@ public class Lab2 {
 			case 3:
 				// validate user input is a valid number
 				try {
-					num.addValue(input);
+					num.addValue(input, false);
 				} catch (InputMismatchException e) {
 					System.out.println("Please enter a valid number\n");
 				}
@@ -111,7 +111,7 @@ public class Lab2 {
 				for (int i = 0; i < itemsToAdd; i++) {
 					try {
 						// add items
-						num.addValue(input);
+						num.addValue(input, false);
 					} catch (InputMismatchException ime) {
 						System.out.println("Please enter a valid number\n");
 					}
@@ -119,36 +119,7 @@ public class Lab2 {
 
 				break;
 			case 7:
-				// to be initiated using the file name
-				Scanner in = null;
-				// to track which line is currently being read
-				int line = 0;
-				System.out.print("Name of the file to read from: ");
-				String fileName = input.next();
-				// create new file object to be read from
-				File inFile = new File(fileName);
-
-				try {
-					// if the file exists read from it line by line
-					if (inFile.exists()) {
-						in = new Scanner(inFile);
-						while (in.hasNextFloat()) {
-							// if we have passed the first line then read
-							if (line > 0) {
-								num.addValues(in);
-							} else {
-								// if we are on the first line skip it and increment counter
-								in.nextLine();
-								line++;
-							}
-						}
-					} else {
-						// if the file does not exist tell the user
-						System.out.println("File not found");
-					}
-				} catch (IOException e) {
-					System.out.println("Could not open file");
-				}
+				num.addValues(input);
 				break;
 			case 8:
 				String outFileName = "";
