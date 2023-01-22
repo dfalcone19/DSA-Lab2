@@ -36,7 +36,7 @@ public class Numbers {
 	private int numItems;
 
 	/**
-	 * Default Constructor.
+	 * Default constructor initializes array to a size of 3.
 	 */
 	public Numbers() {
 		// instantiate numbers to a default size of 3
@@ -45,7 +45,7 @@ public class Numbers {
 	}
 
 	/**
-	 * Constructor that initializes the numbers array.
+	 * Constructor that initializes the numbers array to a size entered by the user.
 	 * 
 	 * @param size - Max size of the numbers array
 	 */
@@ -56,10 +56,10 @@ public class Numbers {
 	}
 
 	/**
-	 * Adds a value in the array.
+	 * Adds a value in the array using user input.
 	 * 
 	 * @param keyboard - Scanner object to use for input
-	 * @param isFile - Determines if reading from a file or from user input
+	 * @param isFile   - Determines if reading from a file or from user input
 	 */
 	public void addValue(Scanner keyboard, boolean isFile) {
 		if (!isFile) {
@@ -79,7 +79,7 @@ public class Numbers {
 	}
 
 	/**
-	 * Adds a value to the array by reading from a file
+	 * Adds a value to the array by reading from a file.
 	 * 
 	 * @param keyboard - Scanner object to use for input
 	 */
